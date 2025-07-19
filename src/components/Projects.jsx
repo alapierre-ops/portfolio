@@ -15,7 +15,7 @@ const Projects = ({ language }) => {
   };
 
   return (
-    <section id="projects" className="container mx-auto px-6 py-20 md:py-24 bg-gray-900 h-screen">
+    <section id="projects" className="container mx-auto h-screen px-6 py-20 md:py-24 bg-gray-900 rounded-2xl">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-extrabold text-white">
           {content[language].title}

@@ -5,7 +5,7 @@ const ProjectCard = ({ project, language }) => {
   return (
     <motion.a 
       href={project.link}
-      className="group block rounded-xl overflow-hidden bg-gray-800/50 shadow-lg hover:shadow-sky-400/20 transition-all duration-300"
+      className="group block rounded-xl overflow-hidden bg-slate-800 shadow-lg hover:shadow-sky-400/20 transition-all duration-300 cursor-pointer"
       whileHover={{ y: -8 }}
       transition={{ type: 'spring', stiffness: 300 }}
     >
