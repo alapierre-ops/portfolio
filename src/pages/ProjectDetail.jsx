@@ -34,7 +34,7 @@ const ProjectDetail = ({ language }) => {
   const { title, image, tags, githubUrl, liveUrl, videoUrl, role, details } = project;
 
   return (
-    <main className="py-12 md:py-20 min-h-screen">
+    <main className="py-12 md:py-20 min-h-screen bg-gray-900">
       <div className="container mx-auto px-6">
         
         <div className="max-w-7xl mx-auto">
@@ -58,7 +58,7 @@ const ProjectDetail = ({ language }) => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mt-12">
                 <div className="lg:col-span-2">
-                    <div className="mb-12 rounded-lg overflow-hidden shadow-2xl shadow-indigo-900/50">
+                    <div className="mb-12 rounded-lg overflow-hidden shadow-2xl shadow-sky-900/50">
                         {videoUrl ? (
                             <div className="aspect-video">
                                 <iframe 

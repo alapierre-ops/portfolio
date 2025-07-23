@@ -27,7 +27,7 @@ const Contact = ({ language }) => {
   const userPhone = "+33 6 40 66 16 55";
 
   return (
-    <section id="contact" className="container py-20 md:py-32 bg-gray-900 mx-auto px-6 rounded-2xl">
+    <section id="contact" className="container py-20 md:py-32 bg-gray-950 mx-auto px-6 rounded-2xl">
       <div className="container mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

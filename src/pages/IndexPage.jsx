@@ -7,7 +7,7 @@ import Contact from '../components/Contact'
 
 function IndexPage({ language, setLanguage }) {
     return (
-        <div className="bg-indigo-950/30">
+        <div className="bg-gray-900">
             <Header language={language} setLanguage={setLanguage} />
             <Hero language={language} />
             <Projects language={language} />
