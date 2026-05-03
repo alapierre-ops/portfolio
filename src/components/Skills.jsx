@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  FaNodeJs, FaReact, FaDocker, FaGitAlt, FaHtml5, FaCss3Alt, FaLinux, FaDatabase
+  FaNodeJs, FaReact, FaDocker, FaGitAlt, FaHtml5, FaLinux, FaDatabase
 } from 'react-icons/fa';
 import { 
   SiExpress, SiPostgresql, SiMongodb, SiTypescript, SiJavascript, 
@@ -18,7 +18,7 @@ const skillsData = [
   { name: 'React', icon: <FaReact />, category: 'Frontend' },
   { name: 'TypeScript', icon: <SiTypescript />, category: 'Frontend' },
   { name: 'JavaScript', icon: <SiJavascript />, category: 'Frontend' },
-  { name: 'TailwindCSS', icon: <FaCss3Alt />, category: 'Frontend' },
+  { name: 'TailwindCSS', icon: <SiTailwindcss />, category: 'Frontend' },
   { name: 'HTML5', icon: <FaHtml5 />, category: 'Frontend' },
 
   { name: 'Docker', icon: <FaDocker />, category: 'Architecture & DevOps' },

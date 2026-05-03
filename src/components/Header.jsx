@@ -10,13 +10,13 @@ const Header = ({ language, setLanguage }) => {
       projects: 'Projets',
       skills: 'Compétences',
       contact: 'Contact',
-      resume: 'Mon CV',
+      resume: 'Mon LinkedIn',
     },
     en: {
       projects: 'Projects',
       skills: 'Skills',
       contact: 'Contact',
-      resume: 'Resume',
+      resume: 'LinkedIn',
     },
   };
 
@@ -42,7 +42,7 @@ const Header = ({ language, setLanguage }) => {
           </button>
           
           <a 
-            href="/src/assets/cv.pdf" 
+            href="https://www.linkedin.com/in/axel-lapierre-519b2a26a/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="bg-sky-500 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-sky-600 transition-colors duration-300 shadow-lg shadow-sky-500/20"

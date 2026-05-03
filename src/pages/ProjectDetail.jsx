@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectsData } from '../assets/data/projectsData';
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft, FaPlayCircle } from 'react-icons/fa';
+import ComingSoonPage from './ComingSoonPage';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y, EffectCoverflow } from 'swiper/modules';
@@ -16,19 +17,7 @@ const ProjectDetail = ({ language }) => {
   const project = projectsData.find(p => p.slug === slug);
 
   if (!project) {
-    return (
-        <div className="container mx-auto px-6 py-20 text-center">
-            <h1 className="text-4xl font-bold text-white mb-4">Projet non trouvé</h1>
-            <p className="text-gray-400 mb-8">Désolé, nous n'avons pas pu trouver le projet que vous cherchez.</p>
-            <Link
-                to="/"
-                className="text-sky-400 hover:text-sky-300 transition-colors duration-300 flex items-center justify-center gap-2"
-            >
-                <FaArrowLeft />
-                Retour à l'accueil
-            </Link>
-        </div>
-    );
+    return <ComingSoonPage language={language} />;
   }
 
   const { title, image, tags, githubUrl, liveUrl, videoUrl, role, details } = project;
