@@ -13,7 +13,7 @@ const EntryNoticeModal = ({ onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-6">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 px-6">
       <div className="w-full max-w-2xl rounded-2xl border border-slate-700 bg-slate-900 p-8 shadow-2xl shadow-sky-900/30">
         <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
           Petit message important

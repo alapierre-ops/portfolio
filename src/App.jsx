@@ -6,11 +6,22 @@ import { useState } from 'react';
 
 function App() {
   const [language, setLanguage] = useState('fr');
+  const [isClassicMode, setIsClassicMode] = useState(false);
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<IndexPage language={language} setLanguage={setLanguage} />} />
+        <Route
+          path="/"
+          element={
+            <IndexPage
+              language={language}
+              setLanguage={setLanguage}
+              isClassicMode={isClassicMode}
+              setIsClassicMode={setIsClassicMode}
+            />
+          }
+        />
         <Route path="/project/:slug" element={<ProjectDetail language={language} setLanguage={setLanguage} />} />
         <Route path="*" element={<ComingSoonPage language={language} />} />
       </Routes>
