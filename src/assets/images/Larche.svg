@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+  <defs>
+    <linearGradient id="lb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#0f2036"/>
+    </linearGradient>
+    <linearGradient id="lac" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#lb)"/>
+  <!-- browser chrome -->
+  <rect x="90" y="120" width="1020" height="510" rx="16" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+  <rect x="90" y="120" width="1020" height="56" rx="16" fill="#111c2e"/>
+  <rect x="90" y="150" width="1020" height="26" fill="#111c2e"/>
+  <circle cx="126" cy="148" r="7" fill="#334155"/>
+  <circle cx="150" cy="148" r="7" fill="#334155"/>
+  <circle cx="174" cy="148" r="7" fill="#334155"/>
+  <rect x="220" y="136" width="600" height="26" rx="13" fill="#0b1220"/>
+  <text x="244" y="154" fill="#64748b" font-size="15">larchecentredaffaires.fr</text>
+  <!-- content -->
+  <text x="140" y="270" fill="#e2e8f0" font-size="46" font-weight="700">L'Arche Centre d'Affaires</text>
+  <text x="140" y="312" fill="#7dd3fc" font-size="22" font-weight="600">Domiciliation commerciale · SaaS d'abonnement</text>
+  <g fill="#94a3b8" font-size="19">
+    <text x="140" y="372">Backend &amp; API · espace client · génération de contrats PDF</text>
+    <text x="140" y="404">Abonnements &amp; webhooks Stripe · DNS · déploiement AWS Amplify</text>
+  </g>
+  <!-- chips -->
+  <g font-size="16" font-weight="600">
+    <rect x="140" y="450" width="110" height="38" rx="19" fill="#0b2a3a" stroke="#155e75"/><text x="160" y="475" fill="#7dd3fc">Node.js</text>
+    <rect x="266" y="450" width="94" height="38" rx="19" fill="#0b2a3a" stroke="#155e75"/><text x="286" y="475" fill="#7dd3fc">Stripe</text>
+    <rect x="376" y="450" width="130" height="38" rx="19" fill="#0b2a3a" stroke="#155e75"/><text x="396" y="475" fill="#7dd3fc">AWS Amplify</text>
+    <rect x="522" y="450" width="120" height="38" rx="19" fill="#0b2a3a" stroke="#155e75"/><text x="542" y="475" fill="#7dd3fc">PDF · DNS</text>
+  </g>
+  <rect x="140" y="556" width="215" height="30" rx="15" fill="#0b1220" stroke="#1e293b"/>
+  <text x="158" y="576" fill="#475569" font-size="14" letter-spacing="1">APERÇU · SCREENSHOT À VENIR</text>
+  <text x="1070" y="600" text-anchor="end" fill="url(#lac)" font-size="20" font-weight="700">majoli · alternance</text>
+</svg>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaRobot } from 'react-icons/fa';
 
 const Header = ({ language, setLanguage }) => {
   const toggleLanguage = () => {
@@ -7,12 +8,16 @@ const Header = ({ language, setLanguage }) => {
 
   const navLinks = {
     fr: {
+      interview: 'Entretien IA',
+      journey: 'Parcours',
       projects: 'Projets',
       skills: 'Compétences',
       contact: 'Contact',
       resume: 'Mon LinkedIn',
     },
     en: {
+      interview: 'Ask AI',
+      journey: 'Journey',
       projects: 'Projects',
       skills: 'Skills',
       contact: 'Contact',
@@ -27,12 +32,28 @@ const Header = ({ language, setLanguage }) => {
           <a href="#">Axel Lapierre</a>
         </div>
 
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-3 md:space-x-6">
           <div className="hidden md:flex items-center space-x-6 text-gray-300">
+            <a
+              href="#interview"
+              className="flex items-center gap-1.5 text-sky-400 font-semibold hover:text-sky-300 transition-colors duration-300"
+            >
+              <FaRobot aria-hidden />
+              {navLinks[language].interview}
+            </a>
+            <a href="#experience" className="hover:text-sky-400 transition-colors duration-300">{navLinks[language].journey}</a>
             <a href="#projects" className="hover:text-sky-400 transition-colors duration-300">{navLinks[language].projects}</a>
             <a href="#skills" className="hover:text-sky-400 transition-colors duration-300">{navLinks[language].skills}</a>
             <a href="#contact" className="hover:text-sky-400 transition-colors duration-300">{navLinks[language].contact}</a>
           </div>
+
+          <a
+            href="#interview"
+            className="md:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sky-500/20 border border-sky-500/50 text-sky-300 text-sm font-semibold hover:bg-sky-500/30 transition-colors"
+          >
+            <FaRobot aria-hidden />
+            {navLinks[language].interview}
+          </a>
           
           <button 
             onClick={toggleLanguage} 

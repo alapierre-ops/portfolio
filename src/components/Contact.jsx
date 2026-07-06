@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaLinkedin, FaGithub, FaPhone } from 'react-icons/fa';
+import { trackEvent } from '../lib/analytics';
 
 const Contact = ({ language }) => {
   const [showPhone, setShowPhone] = useState(false);
@@ -13,12 +14,12 @@ const Contact = ({ language }) => {
   const content = {
     fr: {
       title: "Me Contacter",
-      subtitle: "Une question, une opportunité ? Je suis actuellement à la recherche d'une alternance en développement Full-Stack où je pourrai mettre à profit mes compétences. N'hésitez pas à me contacter.",
+      subtitle: "Une question, une opportunité ? Mon alternance se termine en septembre 2026 et je recherche un poste (CDI) en développement backend, infrastructure ou data. N'hésitez pas à me contacter.",
       buttonText: "Envoyez-moi un email"
     },
     en: {
       title: "Get In Touch",
-      subtitle: "Have a question or an opportunity? I am currently looking for a Full-Stack developer apprenticeship where I can leverage my skills. Feel free to reach out.",
+      subtitle: "Have a question or an opportunity? My work-study program ends in September 2026 and I'm looking for a full-time role in backend, infrastructure or data engineering. Feel free to reach out.",
       buttonText: "Send me an email"
     }
   };
@@ -44,6 +45,7 @@ const Contact = ({ language }) => {
 
           <a
             href={`mailto:${userEmail}`}
+            onClick={() => trackEvent('Contact Click', { method: 'email' })}
             className="inline-block bg-sky-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-sky-600 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-sky-500/20"
           >
             {content[language].buttonText}

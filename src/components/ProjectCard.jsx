@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { trackEvent } from '../lib/analytics';
 
 const ProjectCard = ({ project, language }) => {
   const MotionLink = motion(Link);
@@ -8,6 +9,7 @@ const ProjectCard = ({ project, language }) => {
   return (
     <MotionLink
       to={project.link}
+      onClick={() => trackEvent('Project Card Click', { slug: project.slug })}
       className="group block rounded-xl overflow-hidden bg-slate-800 shadow-lg hover:shadow-sky-400/20 transition-all duration-300 cursor-pointer"
       whileHover={{ y: -8 }}
       transition={{ type: 'spring', stiffness: 300 }}

@@ -1,41 +1,62 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  FaNodeJs, FaReact, FaDocker, FaGitAlt, FaHtml5, FaLinux, FaDatabase
+import {
+  FaNodeJs, FaReact, FaDocker, FaGitAlt, FaHtml5, FaLinux, FaDatabase, FaAws,
+  FaExchangeAlt, FaInfinity, FaNetworkWired, FaChartLine, FaProjectDiagram,
+  FaSpider, FaShieldAlt, FaRobot, FaClock, FaEnvelope
 } from 'react-icons/fa';
-import { 
-  SiExpress, SiPostgresql, SiMongodb, SiTypescript, SiJavascript, 
-  SiTailwindcss, SiFirebase, SiCplusplus, SiGodotengine, SiNginx 
+import {
+  SiExpress, SiPostgresql, SiMongodb, SiTypescript, SiJavascript,
+  SiTailwindcss, SiFirebase, SiCplusplus, SiGodotengine, SiNginx,
+  SiNextdotjs, SiVite, SiSqlite, SiStripe, SiCloudflare
 } from 'react-icons/si';
 
 const skillsData = [
-  { name: 'Node.js', icon: <FaNodeJs />, category: 'Backend' },
-  { name: 'Express', icon: <SiExpress />, category: 'Backend' },
-  { name: 'PostgreSQL', icon: <SiPostgresql />, category: 'Backend' },
-  { name: 'MongoDB', icon: <SiMongodb />, category: 'Backend' },
-  { name: 'C++', icon: <SiCplusplus />, category: 'Backend' },
-    
+  { name: 'Node.js', icon: <FaNodeJs />, category: 'Backend & Data' },
+  { name: 'Express', icon: <SiExpress />, category: 'Backend & Data' },
+  { name: 'REST APIs', icon: <FaExchangeAlt />, category: 'Backend & Data' },
+  { name: 'PostgreSQL', icon: <SiPostgresql />, category: 'Backend & Data' },
+  { name: 'MongoDB', icon: <SiMongodb />, category: 'Backend & Data' },
+  { name: 'SQLite', icon: <SiSqlite />, category: 'Backend & Data' },
+  { name: 'C++', icon: <SiCplusplus />, category: 'Backend & Data' },
+
   { name: 'React', icon: <FaReact />, category: 'Frontend' },
+  { name: 'Next.js', icon: <SiNextdotjs />, category: 'Frontend' },
   { name: 'TypeScript', icon: <SiTypescript />, category: 'Frontend' },
   { name: 'JavaScript', icon: <SiJavascript />, category: 'Frontend' },
   { name: 'TailwindCSS', icon: <SiTailwindcss />, category: 'Frontend' },
+  { name: 'Vite', icon: <SiVite />, category: 'Frontend' },
   { name: 'HTML5', icon: <FaHtml5 />, category: 'Frontend' },
 
-  { name: 'Docker', icon: <FaDocker />, category: 'Architecture & DevOps' },
-  { name: 'CI/CD', icon: <FaDatabase />, category: 'Architecture & DevOps' },
-  { name: 'REST APIs', icon: <FaDatabase />, category: 'Architecture & DevOps' },
-  { name: 'Git', icon: <FaGitAlt />, category: 'Architecture & DevOps' },
-  { name: 'Nginx', icon: <SiNginx />, category: 'Architecture & DevOps' },
-  { name: 'Linux', icon: <FaLinux />, category: 'Architecture & DevOps' },
-    
-  { name: 'Firebase', icon: <SiFirebase />, category: 'Outils & Autres' },
-  { name: 'Godot', icon: <SiGodotengine />, category: 'Outils & Autres' },
+  { name: 'Docker', icon: <FaDocker />, category: 'Infrastructure & DevOps' },
+  { name: 'Linux / VPS', icon: <FaLinux />, category: 'Infrastructure & DevOps' },
+  { name: 'AWS', icon: <FaAws />, category: 'Infrastructure & DevOps' },
+  { name: 'Nginx', icon: <SiNginx />, category: 'Infrastructure & DevOps' },
+  { name: 'DNS / Route 53', icon: <FaNetworkWired />, category: 'Infrastructure & DevOps' },
+  { name: 'CI/CD', icon: <FaInfinity />, category: 'Infrastructure & DevOps' },
+  { name: 'Git', icon: <FaGitAlt />, category: 'Infrastructure & DevOps' },
+  { name: 'Observability', icon: <FaChartLine />, category: 'Infrastructure & DevOps' },
+
+  { name: 'Data Pipelines / ETL', icon: <FaProjectDiagram />, category: 'Data, AI & Automation' },
+  { name: 'Web Scraping', icon: <FaSpider />, category: 'Data, AI & Automation' },
+  { name: 'Certificate Transparency', icon: <FaShieldAlt />, category: 'Data, AI & Automation' },
+  { name: 'LLM / AI (Groq)', icon: <FaRobot />, category: 'Data, AI & Automation' },
+  { name: 'Cron / Automation', icon: <FaClock />, category: 'Data, AI & Automation' },
+
+  { name: 'Stripe', icon: <SiStripe />, category: 'Tools & Ecosystem' },
+  { name: 'Firebase', icon: <SiFirebase />, category: 'Tools & Ecosystem' },
+  { name: 'Cloudflare', icon: <SiCloudflare />, category: 'Tools & Ecosystem' },
+  { name: 'SmartLead / HubSpot', icon: <FaEnvelope />, category: 'Tools & Ecosystem' },
+  { name: 'Godot', icon: <SiGodotengine />, category: 'Tools & Ecosystem' },
 ];
 
 const skillCategories = {
-  fr: ['Backend', 'Frontend', 'Architecture & DevOps', 'Outils & Autres'],
-  en: ['Backend', 'Frontend', 'Architecture & DevOps', 'Tools & Others']
+  fr: ['Backend & Data', 'Frontend', 'Infrastructure & DevOps', 'Data, IA & Automatisation', 'Outils & Écosystème'],
+  en: ['Backend & Data', 'Frontend', 'Infrastructure & DevOps', 'Data, AI & Automation', 'Tools & Ecosystem'],
 };
+
+// Canonical category keys (must match skillsData[].category), aligned by index with skillCategories.
+const categoryKeys = ['Backend & Data', 'Frontend', 'Infrastructure & DevOps', 'Data, AI & Automation', 'Tools & Ecosystem'];
 
 const Skills = ({ language }) => {
   const containerVariants = {
@@ -63,18 +84,18 @@ const Skills = ({ language }) => {
             {language === 'fr' ? 'Mes Compétences Techniques' : 'My Technical Skills'}
           </h2>
           <p className="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">
-            {language === 'fr' 
-              ? "Voici les technologies et outils que je maîtrise et que j'utilise fréquemment."
-              : "Here are the technologies and tools I master and use frequently."
+            {language === 'fr'
+              ? "Les technologies et outils que j'utilise pour concevoir, déployer et exploiter des systèmes en production."
+              : "The technologies and tools I use to design, deploy and operate systems in production."
             }
           </p>
         </div>
 
         <div className="max-w-5xl mx-auto">
-          {skillCategories[language].map((category, index) => (
-            <div key={category} className="mb-12">
+          {categoryKeys.map((categoryKey, index) => (
+            <div key={categoryKey} className="mb-12">
               <h3 className="text-2xl font-bold text-sky-400 mb-6 text-center md:text-left">
-                {category}
+                {skillCategories[language][index]}
               </h3>
               <motion.div
                 className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
@@ -84,7 +105,7 @@ const Skills = ({ language }) => {
                 viewport={{ once: true, amount: 0.2 }}
               >
                 {skillsData
-                  .filter(skill => skill.category === skillCategories.en[index])
+                  .filter(skill => skill.category === categoryKey)
                   .map(skill => (
                     <motion.div
                       key={skill.name}
@@ -94,7 +115,7 @@ const Skills = ({ language }) => {
                       <div className="text-5xl text-gray-300 group-hover:text-sky-400 transition-colors duration-300">
                         {skill.icon}
                       </div>
-                      <p className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors duration-300">
+                      <p className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
                         {skill.name}
                       </p>
                     </motion.div>

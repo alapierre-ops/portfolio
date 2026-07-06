@@ -1,0 +1,56 @@
+{
+  "skills": [
+    { "name": "Node.js", "category": "Backend & Data" },
+    { "name": "Express", "category": "Backend & Data" },
+    { "name": "REST APIs", "category": "Backend & Data" },
+    { "name": "PostgreSQL", "category": "Backend & Data" },
+    { "name": "MongoDB", "category": "Backend & Data" },
+    { "name": "SQLite", "category": "Backend & Data" },
+    { "name": "C++", "category": "Backend & Data" },
+
+    { "name": "React", "category": "Frontend" },
+    { "name": "Next.js", "category": "Frontend" },
+    { "name": "TypeScript", "category": "Frontend" },
+    { "name": "JavaScript", "category": "Frontend" },
+    { "name": "TailwindCSS", "category": "Frontend" },
+    { "name": "Vite", "category": "Frontend" },
+    { "name": "HTML5", "category": "Frontend" },
+
+    { "name": "Docker", "category": "Infrastructure & DevOps" },
+    { "name": "Linux / VPS", "category": "Infrastructure & DevOps" },
+    { "name": "AWS", "category": "Infrastructure & DevOps" },
+    { "name": "Nginx", "category": "Infrastructure & DevOps" },
+    { "name": "DNS / Route 53", "category": "Infrastructure & DevOps" },
+    { "name": "CI/CD", "category": "Infrastructure & DevOps" },
+    { "name": "Git", "category": "Infrastructure & DevOps" },
+    { "name": "Observability", "category": "Infrastructure & DevOps" },
+
+    { "name": "Data Pipelines / ETL", "category": "Data, AI & Automation" },
+    { "name": "Web Scraping", "category": "Data, AI & Automation" },
+    { "name": "Certificate Transparency", "category": "Data, AI & Automation" },
+    { "name": "LLM / AI (Groq)", "category": "Data, AI & Automation" },
+    { "name": "Cron / Automation", "category": "Data, AI & Automation" },
+
+    { "name": "Stripe", "category": "Tools & Ecosystem" },
+    { "name": "Firebase", "category": "Tools & Ecosystem" },
+    { "name": "Cloudflare", "category": "Tools & Ecosystem" },
+    { "name": "SmartLead / HubSpot", "category": "Tools & Ecosystem" },
+    { "name": "Godot", "category": "Tools & Ecosystem" }
+  ],
+  "categoryLabels": {
+    "fr": {
+      "Backend & Data": "Backend & Data",
+      "Frontend": "Frontend",
+      "Infrastructure & DevOps": "Infrastructure & DevOps",
+      "Data, AI & Automation": "Data, IA & Automatisation",
+      "Tools & Ecosystem": "Outils & Écosystème"
+    },
+    "en": {
+      "Backend & Data": "Backend & Data",
+      "Frontend": "Frontend",
+      "Infrastructure & DevOps": "Infrastructure & DevOps",
+      "Data, AI & Automation": "Data, AI & Automation",
+      "Tools & Ecosystem": "Tools & Ecosystem"
+    }
+  }
+}

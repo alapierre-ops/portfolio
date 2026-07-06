@@ -13,15 +13,17 @@ const Hero = ({ language }) => {
   };
   const content = {
     fr: {
-        headline: "Développeur Full-Stack, Spécialiste Backend & Architecture.",
-        subheadline: "En dernière année d'école d'ingénieur, je conçois et développe des solutions back-end robustes et scalables, tout en collaborant efficacement avec les équipes front-end pour livrer des applications complètes et performantes.",
+        headline: "Je construis des systèmes qui tournent en production, 24/7.",
+        subheadline: "Développeur full-stack en fin d'alternance, spécialisé backend, infrastructure et data. J'ai conçu et j'exploite seul un pipeline temps réel qui traite ~387 000 domaines par jour, livré des sites clients performants et géré leurs déploiements.",
         ctaPrimary: "Voir mes projets",
+        ctaInterview: "Poser une question à l'IA",
         ctaSecondary: "Me contacter",
       },
       en: {
-        headline: "Full-Stack Developer, Backend & Architecture Specialist.",
-        subheadline: "As a final-year engineering student, I design and build robust, scalable backend solutions, while collaborating effectively with front-end teams to deliver complete and high-performance applications.",
+        headline: "I build systems that run in production, 24/7.",
+        subheadline: "Full-stack developer finishing a work-study program, focused on backend, infrastructure and data. I single-handedly built and run a real-time pipeline processing ~387,000 domains per day, shipped high-performance client sites and handled their deployments.",
         ctaPrimary: "View my work",
+        ctaInterview: "Ask the AI",
         ctaSecondary: "Get in touch",
       },
   };
@@ -52,15 +54,18 @@ const Hero = ({ language }) => {
                     </motion.p>
 
                     <motion.div 
-                        className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-10"
+                        className="flex flex-col sm:flex-row flex-wrap gap-4 mb-10"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
                     >
-                    <a href="#projects" className="bg-sky-500 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-sky-600 transition-colors duration-300 shadow-lg shadow-sky-500/30">
+                    <a href="#interview" className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-8 py-3 rounded-md text-lg font-semibold hover:from-sky-600 hover:to-cyan-600 transition-colors duration-300 shadow-lg shadow-sky-500/40 text-center">
+                    {content[language].ctaInterview}
+                    </a>
+                    <a href="#projects" className="bg-sky-500/20 border-2 border-sky-500 text-sky-300 px-8 py-3 rounded-md text-lg font-semibold hover:bg-sky-500/30 transition-colors duration-300 text-center">
                     {content[language].ctaPrimary}
                     </a>
-                    <a href="#contact" className="border-2 border-gray-600 text-gray-300 px-8 py-3 rounded-md text-lg font-semibold hover:bg-gray-800 hover:border-gray-500 hover:text-gray-300 transition-colors duration-300">
+                    <a href="#contact" className="border-2 border-gray-600 text-gray-300 px-8 py-3 rounded-md text-lg font-semibold hover:bg-gray-800 hover:border-gray-500 hover:text-gray-300 transition-colors duration-300 text-center">
                     {content[language].ctaSecondary}
                     </a>
                     </motion.div>

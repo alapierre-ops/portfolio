@@ -1,0 +1,77 @@
+{
+  "name": "Axel Lapierre",
+  "title": {
+    "fr": "Développeur Full-Stack — Backend, Infrastructure & Data",
+    "en": "Full-Stack Developer — Backend, Infrastructure & Data"
+  },
+  "education": {
+    "fr": "Master Manager de solutions digitales & Data — ESIMED (alternance, fin sept. 2026)",
+    "en": "Master's in Digital Solutions & Data Management — ESIMED (work-study, graduating Sept 2026)"
+  },
+  "specialization": {
+    "fr": "Backend robuste et scalable, pipelines de données en production, déploiement et ops",
+    "en": "Robust, scalable backend, production data pipelines, deployment and ops"
+  },
+  "bio": {
+    "short": {
+      "fr": "Développeur full-stack en fin d'alternance (3 ans en agence web), spécialisé backend, infrastructure et data. Je conçois, déploie et exploite des systèmes qui tournent en production 24/7 — des pipelines de données temps réel aux sites clients performants.",
+      "en": "Full-stack developer finishing a 3-year work-study program at a web agency, focused on backend, infrastructure and data. I design, deploy and operate systems that run in production 24/7 — from real-time data pipelines to high-performance client sites."
+    },
+    "long": {
+      "fr": "En trois ans d'alternance chez Majoli, je suis passé d'exécutant no-code à référent technique de la prospection B2B de l'entreprise. J'ai conçu et je fais tourner seul DomainRadar, un pipeline temps réel qui traite ~387 000 domaines par jour, ainsi que l'infrastructure d'envoi qui alimente l'essentiel des nouveaux leads de l'agence. En parallèle, j'ai livré des sites clients complets (Next.js, Stripe, SEO), géré des déploiements (AWS, VPS Linux, Docker, Nginx, DNS) et recruté puis encadré des développeurs. Ce qui me plaît le plus : le backend, l'infrastructure et l'ops — les systèmes fiables qui tournent sans surveillance. Je recherche un poste (CDI) où je peux continuer sur cette voie.",
+      "en": "Over three years of work-study at Majoli, I went from a no-code executant to the company's technical lead on B2B prospection. I single-handedly built and run DomainRadar, a real-time pipeline processing ~387,000 domains per day, along with the sending infrastructure that feeds most of the agency's new leads. In parallel, I have shipped complete client sites (Next.js, Stripe, SEO), handled deployments (AWS, Linux VPS, Docker, Nginx, DNS) and recruited and mentored developers. What I enjoy most: backend, infrastructure and ops — reliable systems that run unattended. I'm looking for a full-time role where I can keep growing on that path."
+    }
+  },
+  "contact": {
+    "email": "lapierre.axel30@gmail.com",
+    "phone": "+33 6 40 66 16 55",
+    "github": "https://github.com/alapierre-ops",
+    "githubUsername": "alapierre-ops",
+    "linkedin": "https://www.linkedin.com/in/axel-lapierre-519b2a26a/",
+    "linkedinUsername": "axel-lapierre-519b2a26a"
+  },
+  "talkingPoints": {
+    "strengths": {
+      "fr": [
+        "Conception et exploitation de pipelines de données en production (temps réel & batch)",
+        "Backend robuste et scalable : Node.js, Express, APIs REST, bases SQL/NoSQL",
+        "Infrastructure & ops : Docker, VPS Linux, AWS, Nginx, DNS, CI/CD, observabilité",
+        "Autonomie totale : livrer et faire tourner un système de bout en bout, sans senior",
+        "Intégrations tierces & data : WHOIS/INPI, Stripe, SmartLead/HubSpot, IA (Groq)"
+      ],
+      "en": [
+        "Designing and operating production data pipelines (real-time & batch)",
+        "Robust, scalable backend: Node.js, Express, REST APIs, SQL/NoSQL databases",
+        "Infrastructure & ops: Docker, Linux VPS, AWS, Nginx, DNS, CI/CD, observability",
+        "Full autonomy: shipping and running an end-to-end system, without a senior",
+        "Third-party & data integrations: WHOIS/INPI, Stripe, SmartLead/HubSpot, AI (Groq)"
+      ]
+    },
+    "workStyle": {
+      "fr": [
+        "Orienté problème métier : je commence par comprendre le besoin réel",
+        "Build vs buy : coder quand ça crée un avantage, réutiliser le SaaS mature sinon",
+        "Fiabilité en prod : monitoring, garde-fous, documentation quand je suis seul sur un système",
+        "Je fais le pont entre le business et la technique, dans les deux sens"
+      ],
+      "en": [
+        "Business-problem oriented: I start by understanding the real need",
+        "Build vs buy: code when it creates an edge, reuse mature SaaS otherwise",
+        "Production reliability: monitoring, safeguards, documentation when I'm the only owner",
+        "I bridge business and engineering, in both directions"
+      ]
+    },
+    "lookingFor": {
+      "fr": [
+        "Un poste (CDI) en développement backend, infrastructure ou data",
+        "Des systèmes qui tournent en production, avec de vraies contraintes (charge, coût, fiabilité)",
+        "Une équipe structurée où je peux continuer à monter en compétences aux côtés de profils seniors"
+      ],
+      "en": [
+        "A full-time role in backend, infrastructure or data engineering",
+        "Systems that run in production, with real constraints (load, cost, reliability)",
+        "A structured team where I can keep growing alongside senior engineers"
+      ]
+    }
+  }
+}

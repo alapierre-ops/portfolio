@@ -5,15 +5,15 @@ import { FaArrowLeft, FaHourglassHalf } from 'react-icons/fa';
 const ComingSoonPage = ({ language = 'fr' }) => {
   const content = {
     fr: {
-      title: "Le site n'est pas encore termine",
-      subtitle: "Cette page n'est pas disponible pour le moment.",
-      message: "Le site sera finalise la semaine prochaine. Merci pour votre patience.",
-      cta: "Retour a l'accueil",
+      title: 'Page introuvable',
+      subtitle: "Cette page n'existe pas ou a été déplacée.",
+      message: "Revenez à l'accueil pour découvrir mes projets et mon parcours.",
+      cta: "Retour à l'accueil",
     },
     en: {
-      title: 'Website not finished yet',
-      subtitle: 'This page is not available for now.',
-      message: 'The website will be completed next week. Thanks for your patience.',
+      title: 'Page not found',
+      subtitle: "This page doesn't exist or has been moved.",
+      message: 'Head back home to explore my projects and journey.',
       cta: 'Back to home',
     },
   };

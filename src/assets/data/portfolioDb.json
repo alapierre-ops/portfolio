@@ -1,0 +1,554 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "slug": "domainradar",
+      "title": {
+        "fr": "DomainRadar — Pipeline de leads B2B temps réel",
+        "en": "DomainRadar — Real-Time B2B Lead Pipeline"
+      },
+      "description": {
+        "fr": "Application qui écoute le flux Certificate Transparency 24/7 pour détecter, enrichir et qualifier ~387 000 domaines .fr par jour, et alimenter les campagnes de prospection.",
+        "en": "An app that listens to the Certificate Transparency stream 24/7 to detect, enrich and qualify ~387,000 .fr domains per day, feeding automated outreach campaigns."
+      },
+      "tags": ["Node.js", "WebSocket", "SQLite", "Docker", "Linux VPS", "Nginx", "ETL", "IA / Groq"],
+      "link": "/project/domainradar",
+      "githubUrl": null,
+      "liveUrl": null,
+      "videoUrl": null,
+      "role": {
+        "fr": "Architecte & développeur unique · Ops",
+        "en": "Sole architect & developer · Ops"
+      },
+      "details": {
+        "about": {
+          "fr": "DomainRadar est l'outil interne de prospection que j'ai conçu, développé et que j'exploite de bout en bout chez Majoli. Il écoute en continu le flux Certificate Transparency (WebSocket) et capte l'émission des nouveaux certificats TLS pour les domaines .fr — un signal quasi temps réel qu'un site web vient d'être mis en ligne. Ce flux brut (~387 000 domaines par jour) est transformé en leads B2B qualifiés et contactables.",
+          "en": "DomainRadar is the internal prospection tool I designed, built and operate end to end at Majoli. It continuously listens to the Certificate Transparency stream (WebSocket) and catches newly issued TLS certificates for .fr domains — a near real-time signal that a website just went live. That raw firehose (~387,000 domains per day) is turned into qualified, contactable B2B leads."
+        },
+        "features": {
+          "fr": [
+            "Écoute continue (24/7) du flux Certificate Transparency (WebSocket), ~387 000 domaines .fr traités par jour.",
+            "Pipeline de 38 étapes : filtrage amont, WHOIS/RDAP, scraping de contact (accueil, sitemap, mentions légales, patterns MX), déduplication.",
+            "Enrichissement société via INPI & API Gouv (dirigeant, adresse, effectif, CA) et classification sectorielle ISIC par IA (pool de clés Groq).",
+            "Concurrence bornée (p-limit) avec mode « turbo » adaptatif selon la file d'attente et la RAM, et garde-fous runtime.",
+            "Exports CSV qualifiés par presets métier → vérification d'emails → SmartLead → HubSpot.",
+            "Observabilité maison : dashboards temps réel, surveillance mémoire et dead man's switch inter-applications pour être alerté si le pipeline s'arrête."
+          ],
+          "en": [
+            "Continuous 24/7 listening on the Certificate Transparency stream (WebSocket), ~387,000 .fr domains processed per day.",
+            "38-step pipeline: upstream filtering, WHOIS/RDAP, contact scraping (homepage, sitemap, legal pages, MX patterns), deduplication.",
+            "Company enrichment via INPI & government APIs (director, address, headcount, revenue) and ISIC sector classification with AI (a pool of Groq keys).",
+            "Bounded concurrency (p-limit) with an adaptive \"turbo\" mode driven by the queue and RAM, plus runtime safeguards.",
+            "Business-preset CSV exports → email verification → SmartLead → HubSpot.",
+            "Home-grown observability: real-time dashboards, memory watchdog and a cross-app dead man's switch to get alerted if the pipeline stops."
+          ]
+        },
+        "problem": {
+          "fr": "Les bases de leads du marché (type Apollo) vendent les mêmes contacts à tout le monde : aucun signal propre, aucune différenciation. Majoli avait besoin d'un signal propriétaire et précoce — savoir qu'un site existe au moment même où il naît — qu'aucun SaaS ne package pour le marché français.",
+          "en": "Off-the-shelf lead databases (Apollo and the like) sell the same contacts to everyone: no proprietary signal, no differentiation. Majoli needed an early, proprietary signal — knowing a site exists the moment it is created — that no SaaS packages for the French market."
+        },
+        "solution": {
+          "fr": "J'ai construit un pipeline temps réel autour du flux Certificate Transparency, déployé sur un VPS dédié (Docker, Nginx, SQLite) isolé de l'application batch pour éviter les conflits de ressources. Chaque domaine passe par un enchaînement de filtres, d'enrichissements (WHOIS, INPI, classification IA) et de découverte de contact, avec une concurrence adaptative bornée pour tenir la charge sur une petite machine. Des dashboards temps réel, une surveillance RAM et un dead man's switch inter-applications garantissent la fiabilité alors que le système tourne sans surveillance la nuit. Il alimente aujourd'hui l'essentiel du pipeline outbound de l'entreprise.",
+          "en": "I built a real-time pipeline around the Certificate Transparency stream, deployed on a dedicated VPS (Docker, Nginx, SQLite) isolated from the batch app to avoid resource contention. Each domain flows through a chain of filters, enrichments (WHOIS, INPI, AI classification) and contact discovery, with adaptive bounded concurrency to sustain the load on a small machine. Real-time dashboards, a RAM watchdog and a cross-app dead man's switch keep it reliable while it runs unattended overnight. It now feeds the bulk of the company's outbound pipeline."
+        },
+        "caseStudy": {
+          "metrics": [
+            { "value": "~387k", "label": { "fr": "domaines traités / jour", "en": "domains processed / day" } },
+            { "value": "38", "label": { "fr": "étapes de pipeline", "en": "pipeline steps" } },
+            { "value": "24/7", "label": { "fr": "écoute temps réel", "en": "real-time listening" } },
+            { "value": "~2 400", "label": { "fr": "emails qualifiés / jour", "en": "qualified emails / day" } }
+          ],
+          "architecture": {
+            "caption": {
+              "fr": "DomainRadar transforme un flux temps réel brut en leads qualifiés. Chaque certificat .fr émis déclenche une chaîne de filtrage, d'enrichissement et de découverte de contact, avant un export nocturne vers les outils d'envoi.",
+              "en": "DomainRadar turns a raw real-time firehose into qualified leads. Every issued .fr certificate triggers a chain of filtering, enrichment and contact discovery, before a nightly export to the sending tools."
+            }
+          },
+          "highlights": [
+            {
+              "title": { "fr": "Fiabilité : du heartbeat au dead-man's-switch", "en": "Reliability: from heartbeat to dead-man's-switch" },
+              "body": {
+                "fr": "Un soir, un nouvel export volumineux lancé en parallèle avec d'autres a fait lire plusieurs gros CSV en RAM simultanément : OOM kill, Docker redémarre, le catch-up au boot relance tout d'un coup → boucle de crash. Correctif : exports séquentiels (libération mémoire entre chaque), plafonds durs, surveillance RAM (alerte Slack), et surtout remplacement du heartbeat par un dead-man's-switch. Un heartbeat ne prévient que quand tout va bien ; le dead-man's-switch prévient quand ça s'arrête.",
+                "en": "One night, a large new export running in parallel with others read several big CSVs into RAM at once: OOM kill, Docker restarts, the boot catch-up replays everything at once → crash loop. Fix: sequential exports (memory freed between each), hard caps, a RAM watchdog (Slack alert), and — above all — replacing the heartbeat with a dead-man's-switch. A heartbeat only tells you when things are fine; a dead-man's-switch tells you when they stop."
+              }
+            },
+            {
+              "title": { "fr": "AWS vs VPS : deux profils de charge", "en": "AWS vs VPS: two load profiles" },
+              "body": {
+                "fr": "Le flux CT tourne 24/7 et traite des centaines de milliers de domaines ; les exports batch font un pic de RAM à minuit. Co-héberger les deux, c'était risquer l'OOM et payer AWS à l'usage pour un débit énorme. DomainRadar tourne donc sur un VPS dédié (Docker, Nginx, SQLite), isolé de l'app batch restée sur AWS.",
+                "en": "The CT stream runs 24/7 and processes hundreds of thousands of domains; the batch exports spike RAM at midnight. Co-hosting both risked OOM and paying usage-based AWS pricing for huge throughput. So DomainRadar runs on a dedicated VPS (Docker, Nginx, SQLite), isolated from the batch app that stayed on AWS."
+              }
+            },
+            {
+              "title": { "fr": "Concurrence adaptative", "en": "Adaptive concurrency" },
+              "body": {
+                "fr": "Pour tenir la charge sur une petite machine, le pipeline borne la concurrence (p-limit) et passe en mode « turbo » (10 → 25 workers) quand la file grossit, puis redescend. Il se coupe si la RAM ou les rate-limits WHOIS/INPI saturent, et désactive les étapes coûteuses (sitemap, pages contact) sous forte charge.",
+                "en": "To sustain load on a small machine, the pipeline bounds concurrency (p-limit) and shifts into a « turbo » mode (10 → 25 workers) when the queue grows, then eases back. It throttles if RAM or WHOIS/INPI rate-limits saturate, and disables costly steps (sitemap, contact pages) under heavy load."
+              }
+            },
+            {
+              "title": { "fr": "Filtrage anti-agence & classification IA", "en": "Anti-agency filtering & AI classification" },
+              "body": {
+                "fr": "Un email mutualisé sur ≥ 3 domaines clients trahit une agence web : il est écarté du contact. Chaque société est classée par secteur (ISIC) via le code NAF INPI, sinon par IA (pool de clés Groq), pour cibler un secteur précis à l'export (ex. hôtellerie).",
+                "en": "A shared email found on ≥ 3 client domains signals a web agency: it's dropped from contact. Each company is classified by sector (ISIC) from its INPI NAF code, otherwise by AI (a pool of Groq keys), so exports can target a precise sector (e.g. hospitality)."
+              }
+            }
+          ]
+        },
+        "gallery": []
+      }
+    },
+    {
+      "id": 2,
+      "slug": "prospectscope",
+      "title": {
+        "fr": "ProspectScope — Pipelines de prospection automatisés",
+        "en": "ProspectScope — Automated Prospection Pipelines"
+      },
+      "description": {
+        "fr": "Application batch qui collecte chaque nuit les nouveaux domaines .fr (AFNIC) et les entreprises fraîchement immatriculées (INPI), les enrichit, vérifie les emails et crée automatiquement les campagnes.",
+        "en": "A batch app that collects new .fr domains (AFNIC) and freshly registered companies (INPI) every night, enriches them, verifies emails and automatically creates the campaigns."
+      },
+      "tags": ["Node.js", "Express", "SQLite", "AWS EC2", "Cron", "WHOIS / RDAP", "SmartLead API", "HubSpot API"],
+      "link": "/project/prospectscope",
+      "githubUrl": null,
+      "liveUrl": null,
+      "videoUrl": null,
+      "role": {
+        "fr": "Architecture, intégrations & prod (co-développé)",
+        "en": "Architecture, integrations & production (co-developed)"
+      },
+      "details": {
+        "about": {
+          "fr": "ProspectScope est l'application interne qui industrialise la prospection par lots. Chaque nuit, un cron enchaîne collecte, enrichissement, vérification et export vers les outils d'envoi. C'est la première brique « build » de Majoli : elle a remplacé un processus 100 % manuel (listes Apollo, imports CSV) par des pipelines fiables et reproductibles.",
+          "en": "ProspectScope is the internal app that industrializes batch prospection. Every night, a cron chains collection, enrichment, verification and export to the sending tools. It is Majoli's first \"build\" brick: it replaced a fully manual process (Apollo lists, CSV imports) with reliable, reproducible pipelines."
+        },
+        "features": {
+          "fr": [
+            "Pipeline « domain » : open data AFNIC quotidien, WHOIS/RDAP, déduplication, blacklist (opt-out / RGPD), vérification email (Million Verifier), export CSV.",
+            "Pipeline « company » : entreprises INPI récemment créées, recherche des dirigeants via LinkedIn (Google CSE) et enrichissement email (Kaspr).",
+            "Création automatique des campagnes SmartLead (duplication d'un modèle, import des leads vérifiés) et upsert HubSpot.",
+            "Auto-test de bout en bout (preflight) au démarrage et avant le cron nocturne pour détecter une régression avant la prod.",
+            "Déploiement AWS EC2 (machine toujours allumée pour le cron), DNS Route 53, coordination par webhook avec DomainRadar."
+          ],
+          "en": [
+            "\"domain\" pipeline: daily AFNIC open data, WHOIS/RDAP, deduplication, blacklist (opt-out / GDPR), email verification (Million Verifier), CSV export.",
+            "\"company\" pipeline: freshly created INPI companies, director lookup via LinkedIn (Google CSE) and email enrichment (Kaspr).",
+            "Automatic SmartLead campaign creation (template duplication, verified-lead import) and HubSpot upsert.",
+            "End-to-end self-test (preflight) at boot and before the nightly cron to catch regressions before production.",
+            "AWS EC2 deployment (always-on for the cron), Route 53 DNS, webhook coordination with DomainRadar."
+          ]
+        },
+        "problem": {
+          "fr": "La prospection manuelle ne scalait pas : chaque jour, télécharger les fichiers, filtrer, vérifier les emails et importer à la main coûtait du temps et introduisait des erreurs. Il fallait aussi des signaux que personne ne vend clé en main (nouveaux .fr, immatriculations INPI).",
+          "en": "Manual prospection did not scale: downloading files, filtering, verifying emails and importing by hand every day cost time and introduced errors. It also required signals nobody sells off the shelf (new .fr domains, INPI registrations)."
+        },
+        "solution": {
+          "fr": "J'ai posé l'architecture et les specs, développé les scripts de base et surtout toute l'intégration SmartLead / HubSpot et la mise en production, le tout co-développé avec un autre développeur de l'équipe. Le résultat : des pipelines nocturnes idempotents qui transforment des sources publiques (AFNIC, INPI, WHOIS) en campagnes prêtes à partir, avec vérification d'emails et respect de la blacklist d'opposition intégrés au flux.",
+          "en": "I set the architecture and specs, built the core scripts and — above all — the entire SmartLead / HubSpot integration and production deployment, all co-developed with another developer on the team. The result: idempotent nightly pipelines that turn public sources (AFNIC, INPI, WHOIS) into ready-to-send campaigns, with email verification and opt-out blacklist enforcement baked into the flow."
+        },
+        "caseStudy": {
+          "metrics": [
+            { "value": "~600", "label": { "fr": "emails qualifiés / jour", "en": "qualified emails / day" } },
+            { "value": "2", "label": { "fr": "pipelines (AFNIC + INPI)", "en": "pipelines (AFNIC + INPI)" } },
+            { "value": "100%", "label": { "fr": "automatisé (cron nocturne)", "en": "automated (nightly cron)" } },
+            { "value": "< 1%", "label": { "fr": "taux de bounce", "en": "bounce rate" } }
+          ],
+          "architecture": {
+            "caption": {
+              "fr": "ProspectScope industrialise la prospection par lots : chaque nuit, un cron enchaîne collecte, enrichissement, vérification et création automatique des campagnes.",
+              "en": "ProspectScope industrializes batch prospection: every night, a cron chains collection, enrichment, verification and automatic campaign creation."
+            }
+          },
+          "highlights": [
+            {
+              "title": { "fr": "Build vs buy : tester en SaaS, coder pour la donnée", "en": "Build vs buy: test in SaaS, build for data" },
+              "body": {
+                "fr": "On a d'abord validé le canal en 100 % SaaS (SmartLead + Apollo, manuel) pendant plusieurs semaines. Le build n'est venu que quand la limite est devenue la donnée, pas le volume : les signaux propriétaires (nouveaux .fr, immatriculations INPI) ne s'achètent pas clé en main. Le SaaS d'envoi reste ; le code alimente les campagnes avec de la donnée introuvable ailleurs.",
+                "en": "We first validated the channel fully in SaaS (SmartLead + Apollo, manual) for several weeks. Build only came when the bottleneck became the data, not the volume: proprietary signals (new .fr domains, INPI registrations) aren't sold off the shelf. The sending SaaS stays; the code feeds campaigns with data you can't buy elsewhere."
+              }
+            },
+            {
+              "title": { "fr": "Pipelines nocturnes idempotents", "en": "Idempotent nightly pipelines" },
+              "body": {
+                "fr": "Un même domaine qui réapparaît ne crée pas de doublon et n'est pas recontacté : déduplication et blacklist d'opposition (RGPD) filtrent chaque export. La conformité est intégrée au flux, pas ajoutée après coup.",
+                "en": "A domain that reappears creates no duplicate and isn't re-contacted: deduplication and an opt-out blacklist (GDPR) filter every export. Compliance is built into the flow, not bolted on afterwards."
+              }
+            },
+            {
+              "title": { "fr": "Preflight : détecter une régression avant minuit", "en": "Preflight: catch regressions before midnight" },
+              "body": {
+                "fr": "Un test de bout en bout s'exécute au démarrage et avant le cron nocturne : il vérifie les clés API, les campagnes modèles SmartLead et génère un export test. L'objectif : détecter un problème avant que le cron parte, quand personne n'est au bureau.",
+                "en": "An end-to-end test runs at boot and before the nightly cron: it checks API keys, SmartLead template campaigns and generates a test export. The goal: catch a problem before the cron fires, when nobody is at the office."
+              }
+            },
+            {
+              "title": { "fr": "Intégration SmartLead & HubSpot", "en": "SmartLead & HubSpot integration" },
+              "body": {
+                "fr": "À chaque campagne créée, les leads sont poussés dans HubSpot ; un webhook fait remonter les réponses « intéressées » vers un tableau dédié, et un cron génère des tâches de relance. J'ai porté toute cette intégration et sa mise en production.",
+                "en": "For every campaign created, leads are pushed to HubSpot; a webhook surfaces « interested » replies to a dedicated board, and a cron generates follow-up tasks. I owned this entire integration and its production rollout."
+              }
+            }
+          ]
+        },
+        "gallery": []
+      }
+    },
+    {
+      "id": 3,
+      "slug": "inh",
+      "title": {
+        "fr": "INH — Site vitrine & acquisition (client)",
+        "en": "INH — Marketing Site & Acquisition (client)"
+      },
+      "description": {
+        "fr": "Site Next.js livré en solo en un mois pour un client B2B : simulateur de devis, audit interactif, 17 pages SEO locales, blog et back-office. Lighthouse ~99, Semrush 98 %.",
+        "en": "A Next.js site delivered solo in one month for a B2B client: quote simulator, interactive audit, 17 local SEO pages, blog and back-office. Lighthouse ~99, Semrush 98%."
+      },
+      "tags": ["Next.js 16", "React 19", "TypeScript", "Tailwind", "MongoDB", "NextAuth", "SendGrid", "AWS S3"],
+      "link": "/project/inh",
+      "githubUrl": null,
+      "liveUrl": "https://inh-nettoyage-hotelier.com",
+      "videoUrl": null,
+      "role": {
+        "fr": "Développeur full-stack (projet solo)",
+        "en": "Full-Stack Developer (solo project)"
+      },
+      "details": {
+        "about": {
+          "fr": "INH est le premier client Majoli sur le modèle « site + acquisition ». J'ai livré l'intégralité du site en solo sur un mois : un site vitrine performant et taillé pour le SEO local, doublé d'outils de génération de leads et d'un back-office. J'y ai ensuite branché une campagne de prospection dédiée, filtrée sur le secteur de l'hôtellerie.",
+          "en": "INH is Majoli's first client on the \"site + acquisition\" model. I delivered the whole site solo in one month: a fast, local-SEO-oriented marketing site, paired with lead-generation tools and a back-office. I then plugged in a dedicated outreach campaign, filtered on the hospitality sector."
+        },
+        "features": {
+          "fr": [
+            "Simulateur de devis avec export PDF.",
+            "Audit propreté interactif : 25 questions, score sur 100, PDF généré côté serveur (PDFKit).",
+            "17 pages SEO locales (villes) avec carte Leaflet, et un blog éditorial.",
+            "Back-office /admin (NextAuth) : CRUD blog, gestion des utilisateurs et consultation des leads.",
+            "Formulaires protégés (Cloudflare Turnstile), emails transactionnels (SendGrid), images sur AWS S3.",
+            "Déploiement VPS : build Next.js, PM2, Nginx en reverse proxy, HTTPS."
+          ],
+          "en": [
+            "Quote simulator with PDF export.",
+            "Interactive cleanliness audit: 25 questions, score out of 100, server-side PDF (PDFKit).",
+            "17 local SEO pages (cities) with a Leaflet map, plus an editorial blog.",
+            "Back-office /admin (NextAuth): blog CRUD, user management and lead review.",
+            "Protected forms (Cloudflare Turnstile), transactional emails (SendGrid), images on AWS S3.",
+            "VPS deployment: Next.js build, PM2, Nginx reverse proxy, HTTPS."
+          ]
+        },
+        "problem": {
+          "fr": "Le client avait besoin d'une présence en ligne haut de gamme qui convertit — pas seulement une vitrine — et d'un canal d'acquisition pour trouver de nouveaux hôtels à équiper, sans dépendre du bouche-à-oreille.",
+          "en": "The client needed a premium online presence that actually converts — not just a brochure site — and an acquisition channel to find new hotels to serve, without relying on word of mouth."
+        },
+        "solution": {
+          "fr": "J'ai développé un site Next.js orienté performance et SEO (Lighthouse ~99, Semrush 98 %), avec de vrais lead magnets (simulateur de devis, audit interactif noté sur 100) et un back-office complet. Côté acquisition, j'ai réutilisé la chaîne Majoli (exports DomainRadar filtrés sur le secteur hôtelier, SmartLead, HubSpot) pour alimenter une campagne dédiée. Un seul interlocuteur, du code au premier rendez-vous.",
+          "en": "I built a performance- and SEO-oriented Next.js site (Lighthouse ~99, Semrush 98%), with real lead magnets (quote simulator, interactive audit scored out of 100) and a full back-office. On the acquisition side, I reused the Majoli chain (DomainRadar exports filtered on the hospitality sector, SmartLead, HubSpot) to power a dedicated campaign. One point of contact, from code to first meeting."
+        },
+        "gallery": []
+      }
+    },
+    {
+      "id": 4,
+      "slug": "larche",
+      "title": {
+        "fr": "L'Arche Centre d'Affaires — Domiciliation & abonnements",
+        "en": "L'Arche Centre d'Affaires — Domiciliation & Subscriptions"
+      },
+      "description": {
+        "fr": "Backend, API et infra d'un service de domiciliation commerciale : espace client, contrats PDF générés automatiquement, abonnements et webhooks Stripe.",
+        "en": "Backend, API and infra for a business-domiciliation service: client area, auto-generated PDF contracts, Stripe subscriptions and webhooks."
+      },
+      "tags": ["Node.js", "Stripe", "PDF", "AWS Amplify", "Route 53", "API REST"],
+      "link": "/project/larche",
+      "githubUrl": null,
+      "liveUrl": "https://larchecentredaffaires.fr",
+      "videoUrl": null,
+      "role": {
+        "fr": "Backend, intégrations & déploiement",
+        "en": "Backend, integrations & deployment"
+      },
+      "details": {
+        "about": {
+          "fr": "Site et application de domiciliation commerciale pour lequel j'ai pris en charge le backend, l'API et l'infrastructure. L'enjeu : automatiser tout le parcours d'un client qui souscrit une domiciliation, de la signature du contrat à la facturation récurrente.",
+          "en": "A business-domiciliation website and app for which I owned the backend, the API and the infrastructure. The goal: automate the full journey of a client subscribing to a domiciliation, from contract signing to recurring billing."
+        },
+        "features": {
+          "fr": [
+            "API REST et logique métier de la souscription.",
+            "Abonnements et webhooks Stripe (paiements récurrents, cycle de vie de l'abonnement).",
+            "Génération automatique des contrats en PDF.",
+            "Formulaires front-end, gestion du domaine (DNS) et déploiement sur AWS Amplify."
+          ],
+          "en": [
+            "REST API and business logic for the subscription flow.",
+            "Stripe subscriptions and webhooks (recurring payments, subscription lifecycle).",
+            "Automatic PDF contract generation.",
+            "Front-end forms, domain/DNS management and deployment on AWS Amplify."
+          ]
+        },
+        "problem": {
+          "fr": "La domiciliation implique beaucoup d'administratif récurrent (contrats, paiements, justificatifs). Sans automatisation, chaque nouveau client coûte du temps manuel et augmente le risque d'erreur.",
+          "en": "Domiciliation involves a lot of recurring paperwork (contracts, payments, documents). Without automation, every new client costs manual time and increases the risk of error."
+        },
+        "solution": {
+          "fr": "J'ai conçu un backend qui automatise le parcours de bout en bout : abonnements Stripe avec webhooks pour suivre l'état des paiements, contrats PDF générés à la volée, et déploiement AWS Amplify avec gestion du DNS. Le client peut souscrire et être facturé sans intervention manuelle côté agence.",
+          "en": "I built a backend that automates the journey end to end: Stripe subscriptions with webhooks to track payment status, PDF contracts generated on the fly, and AWS Amplify deployment with DNS management. Clients can subscribe and be billed with no manual work on the agency side."
+        },
+        "gallery": []
+      }
+    },
+    {
+      "id": 5,
+      "slug": "iazur",
+      "title": {
+        "fr": "iAzur Solutions — E-commerce de cartes NFC",
+        "en": "iAzur Solutions — NFC Business-Card E-commerce"
+      },
+      "description": {
+        "fr": "Boutique de cartes de visite NFC : paiement unique + abonnement, éditeur de landing page par client (QR code), rendu 3D produit et espace client.",
+        "en": "An NFC business-card store: one-time payment + subscription, per-client landing-page editor (QR code), 3D product rendering and a client area."
+      },
+      "tags": ["React", "Stripe", "3D", "E-commerce", "AWS Amplify"],
+      "link": "/project/iazur",
+      "githubUrl": null,
+      "liveUrl": "https://iazur-solutions.fr",
+      "videoUrl": null,
+      "role": {
+        "fr": "Développeur (fonctionnalités & déploiement)",
+        "en": "Developer (features & deployment)"
+      },
+      "details": {
+        "about": {
+          "fr": "Plateforme e-commerce pour des cartes de visite NFC : chaque carte physique renvoie vers une landing page personnalisable que le client édite lui-même (avec QR code). J'ai travaillé sur les fonctionnalités complexes et le déploiement.",
+          "en": "An e-commerce platform for NFC business cards: each physical card links to a customizable landing page the client edits themselves (with a QR code). I worked on the complex features and the deployment."
+        },
+        "features": {
+          "fr": [
+            "Modèle de paiement mixte : achat unique + abonnement (Stripe).",
+            "Éditeur de landing page par client, avec génération de QR code.",
+            "Rendu 3D du produit pour la prévisualisation.",
+            "Espace client et déploiement sur AWS Amplify."
+          ],
+          "en": [
+            "Hybrid payment model: one-time purchase + subscription (Stripe).",
+            "Per-client landing-page editor, with QR-code generation.",
+            "3D product rendering for preview.",
+            "Client area and deployment on AWS Amplify."
+          ]
+        },
+        "problem": {
+          "fr": "Vendre un objet physique connecté (carte NFC) implique de lier chaque carte à une expérience web personnalisée, gérable par le client final, tout en supportant deux modèles de facturation.",
+          "en": "Selling a connected physical object (an NFC card) means linking each card to a personalized web experience the end client can manage, while supporting two billing models."
+        },
+        "solution": {
+          "fr": "J'ai contribué aux briques les plus techniques : l'éditeur de landing par client avec QR code, le rendu 3D produit et l'intégration de paiement mixte (unique + abonnement), puis le déploiement sur AWS Amplify.",
+          "en": "I contributed the most technical bricks: the per-client landing editor with QR code, the 3D product rendering and the hybrid payment integration (one-time + subscription), then the AWS Amplify deployment."
+        },
+        "gallery": []
+      }
+    },
+    {
+      "id": 6,
+      "slug": "eisenhower",
+      "title": {
+        "fr": "Matrice d'Eisenhower — App de priorisation",
+        "en": "Eisenhower Matrix — Prioritization App"
+      },
+      "description": {
+        "fr": "Un petit outil que j'utilise au quotidien : une matrice impact × effort en glisser-déposer pour trier les tâches et générer un ordre de priorité.",
+        "en": "A small tool I use every day: an impact × effort drag-and-drop matrix to sort tasks and generate a priority order."
+      },
+      "tags": ["React", "Vite", "Drag & Drop", "Netlify"],
+      "link": "/project/eisenhower",
+      "githubUrl": null,
+      "liveUrl": "https://alapierre-ops-eisenhower.netlify.app/",
+      "videoUrl": null,
+      "role": {
+        "fr": "Projet personnel (outil interne)",
+        "en": "Personal project (internal tool)"
+      },
+      "details": {
+        "about": {
+          "fr": "Gérant plusieurs projets en parallèle, j'ai codé ma propre app de priorisation : chaque tâche est positionnée sur une matrice impact × effort, puis l'app en déduit un ordre de priorité (traiter d'abord ce qui rapporte le plus pour le moins d'effort). Je m'en sers pour construire mon planning chaque matin.",
+          "en": "Juggling several projects at once, I built my own prioritization app: each task is placed on an impact × effort matrix, and the app derives a priority order from it (tackle what pays off most for the least effort first). I use it to build my plan every morning."
+        },
+        "features": {
+          "fr": [
+            "Matrice impact × effort en glisser-déposer.",
+            "Génération automatique de l'ordre de priorité et copie de la liste.",
+            "Backlog séparé pour les tâches non planifiées.",
+            "Interface épurée, déployée sur Netlify."
+          ],
+          "en": [
+            "Drag-and-drop impact × effort matrix.",
+            "Automatic priority-order generation and list copy.",
+            "Separate backlog for unplanned tasks.",
+            "Clean UI, deployed on Netlify."
+          ]
+        },
+        "problem": {
+          "fr": "Quand les urgences clients remplacent la moitié du planning chaque jour, il faut un moyen rapide de décider quoi faire en premier.",
+          "en": "When client emergencies replace half the plan every day, you need a fast way to decide what to do first."
+        },
+        "solution": {
+          "fr": "Une app simple et rapide qui matérialise la logique impact/effort et sort un ordre de priorité exploitable en quelques secondes. Petit outil, mais utilisé tous les jours.",
+          "en": "A simple, fast app that materializes the impact/effort logic and outputs an actionable priority order in seconds. A small tool, but used every day."
+        },
+        "gallery": []
+      }
+    },
+    {
+      "id": 7,
+      "slug": "invoicing-app",
+      "title": {
+        "fr": "ProPulse — Application de facturation",
+        "en": "ProPulse — Invoicing Application"
+      },
+      "description": {
+        "fr": "Une application SaaS pour créer et gérer clients, devis et factures, avec authentification et tableau de bord.",
+        "en": "A SaaS application to create and manage clients, quotes, and invoices, with authentication and a dashboard."
+      },
+      "tags": ["React", "Node.js", "Express", "PostgreSQL", "TailwindCSS"],
+      "link": "/project/invoicing-app",
+      "githubUrl": "https://github.com/alapierre-ops/facturation",
+      "liveUrl": null,
+      "videoUrl": null,
+      "role": {
+        "fr": "Développeur Full-Stack (projet solo)",
+        "en": "Full-Stack Developer (solo project)"
+      },
+      "details": {
+        "about": {
+          "fr": "ProPulse est une application SaaS que j'ai développée de A à Z pour simplifier la gestion de la facturation pour les freelances et les petites entreprises. L'objectif était de créer un outil intuitif permettant de suivre les clients, de générer des devis professionnels et de les convertir en factures en un seul clic.",
+          "en": "ProPulse is a SaaS application I developed from scratch to simplify invoice management for freelancers and small businesses. The goal was to create an intuitive tool for tracking clients, generating professional quotes, and converting them into invoices with a single click."
+        },
+        "features": {
+          "fr": [
+            "Authentification sécurisée des utilisateurs avec tokens JWT.",
+            "CRUD complet pour les clients, devis et factures.",
+            "Tableau de bord avec statistiques clés (chiffre d'affaires, factures en attente).",
+            "Conception d'un schéma de base de données relationnelle robuste avec PostgreSQL."
+          ],
+          "en": [
+            "Secure user authentication using JWT tokens.",
+            "Full CRUD functionality for clients, quotes, and invoices.",
+            "Dashboard with key metrics (revenue, pending invoices).",
+            "Designed a robust relational database schema with PostgreSQL."
+          ]
+        },
+        "problem": {
+          "fr": "La gestion de la facturation pour les freelances est souvent manuelle, répétitive et source d'erreurs. Perdre du temps sur l'administratif au lieu de se concentrer sur son cœur de métier est un problème majeur.",
+          "en": "Invoice management for freelancers is often manual, repetitive, and prone to errors. Wasting time on administrative tasks instead of focusing on core business is a major problem."
+        },
+        "solution": {
+          "fr": "J'ai construit ProPulse, une application SaaS complète, pour automatiser ce processus. La solution offre un CRUD complet pour les clients et les devis, la conversion de devis en factures en un clic, et un tableau de bord pour suivre les finances. L'architecture backend robuste avec Node.js et PostgreSQL assure la sécurité et l'intégrité des données, tandis que l'interface en React offre une expérience utilisateur fluide.",
+          "en": "I built ProPulse, a complete SaaS application, to automate this process. The solution provides full CRUD for clients and quotes, one-click conversion of quotes to invoices, and a dashboard to track finances. The robust backend architecture with Node.js and PostgreSQL ensures data security and integrity, while the React interface provides a smooth user experience."
+        },
+        "gallery": []
+      }
+    },
+    {
+      "id": 8,
+      "slug": "twitter-clone",
+      "title": {
+        "fr": "YNot — Clone de Twitter en 1 semaine",
+        "en": "YNot — Twitter Clone in 1 Week"
+      },
+      "description": {
+        "fr": "Défi personnel pour répliquer les fonctionnalités principales de Twitter, incluant les tweets, follows et un fil d'actualité temps réel.",
+        "en": "A personal challenge to replicate Twitter's core features, including tweets, follows, and a real-time news feed."
+      },
+      "tags": ["React", "Firebase", "TypeScript", "Chakra UI"],
+      "link": "/project/twitter-clone",
+      "githubUrl": "https://github.com/alapierre-ops/twitterClone",
+      "liveUrl": null,
+      "videoUrl": null,
+      "role": {
+        "fr": "Développeur Full-Stack (défi personnel)",
+        "en": "Full-Stack Developer (personal challenge)"
+      },
+      "details": {
+        "about": {
+          "fr": "YNot est un clone de Twitter développé en une semaine pour tester mes compétences en React, Firebase et TypeScript. L'application permet de publier des tweets, de suivre d'autres utilisateurs et de voir un fil d'actualité en temps réel.",
+          "en": "YNot is a Twitter clone built in one week to challenge my skills in React, Firebase, and TypeScript. The app allows posting tweets, following other users, and viewing a real-time news feed."
+        },
+        "features": {
+          "fr": [
+            "Authentification avec Firebase (Google, Email).",
+            "Publication, suppression et affichage de tweets en temps réel.",
+            "Système de follow/unfollow entre utilisateurs.",
+            "Fil d'actualité personnalisé selon les abonnements.",
+            "Interface responsive avec Chakra UI."
+          ],
+          "en": [
+            "Authentication with Firebase (Google, Email).",
+            "Real-time posting, deleting, and displaying of tweets.",
+            "Follow/unfollow system between users.",
+            "Personalized news feed based on follows.",
+            "Responsive UI with Chakra UI."
+          ]
+        },
+        "problem": {
+          "fr": "Comment construire une application web complexe et temps-réel de A à Z en un temps record ? Je me suis lancé le défi de cloner les fonctionnalités principales de Twitter en une semaine pour pousser mes compétences en développement rapide, en React et en intégration de services Backend (BaaS) comme Firebase.",
+          "en": "How to build a complex, real-time web application from scratch in record time? I challenged myself to clone Twitter's core features in one week to push my skills in rapid development, React, and integrating Backend-as-a-Service (BaaS) like Firebase."
+        },
+        "solution": {
+          "fr": "Le résultat est une application fonctionnelle avec authentification, un fil d'actualité temps-réel, la possibilité de tweeter, suivre et ne plus suivre des utilisateurs. L'utilisation de TypeScript a garanti un code plus robuste et maintenable, et Firebase a permis de gérer la base de données et l'authentification de manière efficace et scalable.",
+          "en": "The result is a functional application with authentication, a real-time news feed, and the ability to tweet, follow, and unfollow users. Using TypeScript ensured more robust and maintainable code, and Firebase allowed for efficient and scalable database and authentication management."
+        },
+        "gallery": []
+      }
+    },
+    {
+      "id": 9,
+      "slug": "restaurant-culinarium",
+      "title": {
+        "fr": "Culinarium — Site & réservation de restaurant",
+        "en": "Culinarium — Restaurant Site & Booking"
+      },
+      "description": {
+        "fr": "Site de démonstration pour la restauration : API REST, système de réservation, base de données et déploiement conteneurisé.",
+        "en": "A demo site for the restaurant vertical: REST API, booking system, database and containerized deployment."
+      },
+      "tags": ["Node.js", "MongoDB", "Docker", "CI/CD", "API REST"],
+      "link": "/project/restaurant-culinarium",
+      "githubUrl": null,
+      "liveUrl": "https://culinarium.majoli.io",
+      "videoUrl": null,
+      "role": {
+        "fr": "Architecte & développeur backend",
+        "en": "Backend Architect & Developer"
+      },
+      "details": {
+        "about": {
+          "fr": "Culinarium est un site vitrine et de réservation pour la restauration, avec un système de réservation en ligne complet. Il a aussi servi de démo commerciale : un site clé en main que l'on pouvait montrer à des restaurants prospectés pour illustrer ce qu'on savait livrer.",
+          "en": "Culinarium is a showcase and booking site for the restaurant vertical, with a complete online reservation system. It also served as a sales demo: a turnkey site we could show to prospected restaurants to illustrate what we could deliver."
+        },
+        "features": {
+          "fr": [
+            "Conception et développement d'une API REST complète avec Node.js et Express.",
+            "Système de réservation en temps réel.",
+            "Conteneurisation de l'application avec Docker pour un déploiement cohérent.",
+            "Pipeline CI/CD pour automatiser les tests et les déploiements."
+          ],
+          "en": [
+            "Designed and developed a complete REST API with Node.js and Express.",
+            "Real-time reservation system.",
+            "Containerized the application with Docker for consistent deployment.",
+            "CI/CD pipeline to automate testing and deployments."
+          ]
+        },
+        "problem": {
+          "fr": "Un restaurant a besoin d'une présence en ligne moderne avec un système de réservation fiable et autonome, pour éviter les commissions des plateformes tierces et gérer son flux de clients efficacement.",
+          "en": "A restaurant needs a modern online presence with a reliable, autonomous reservation system to avoid third-party platform fees and manage its customer flow efficiently."
+        },
+        "solution": {
+          "fr": "J'ai conçu et développé l'API REST et l'infrastructure backend, avec un système de réservation en temps réel (Node.js, MongoDB). Pour garantir la stabilité et faciliter les mises à jour, j'ai conteneurisé l'application avec Docker et mis en place un pipeline CI/CD.",
+          "en": "I designed and developed the REST API and backend infrastructure, with a real-time reservation system (Node.js, MongoDB). To ensure stability and ease updates, I containerized the application with Docker and set up a CI/CD pipeline."
+        },
+        "gallery": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1330" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+  <defs>
+    <linearGradient id="dr-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1424"/>
+      <stop offset="1" stop-color="#0b1a2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1330" rx="18" fill="url(#dr-bg)"/>
+  <text x="40" y="56" fill="#e2e8f0" font-size="30" font-weight="800">DomainRadar — real-time pipeline</text>
+  <text x="40" y="90" fill="#22d3ee" font-size="19" font-weight="600">Certificate Transparency · ~387k domains/day · 24/7</text>
+
+  <!-- spine -->
+  <line x1="70" y1="150" x2="70" y2="1174" stroke="#1e3a5f" stroke-width="4"/>
+
+  <!-- 1 -->
+  <circle cx="70" cy="150" r="20" fill="#0ea5e9"/><text x="70" y="157" text-anchor="middle" fill="#04121f" font-size="18" font-weight="700">1</text>
+  <rect x="118" y="104" width="742" height="92" rx="14" fill="#0f1b2d" stroke="#1e293b"/>
+  <text x="150" y="142" fill="#e2e8f0" font-size="24" font-weight="700">CertStream</text>
+  <text x="150" y="174" fill="#7dd3fc" font-size="17">WebSocket · new TLS certificates for .fr domains</text>
+
+  <!-- 2 -->
+  <circle cx="70" cy="278" r="20" fill="#0ea5e9"/><text x="70" y="285" text-anchor="middle" fill="#04121f" font-size="18" font-weight="700">2</text>
+  <rect x="118" y="232" width="742" height="92" rx="14" fill="#0f1b2d" stroke="#1e293b"/>
+  <text x="150" y="270" fill="#e2e8f0" font-size="24" font-weight="700">Ingress filters</text>
+  <text x="150" y="302" fill="#7dd3fc" font-size="17">apex / www only · anti-noise · dedup vs DB</text>
+
+  <!-- 3 -->
+  <circle cx="70" cy="406" r="20" fill="#0ea5e9"/><text x="70" y="413" text-anchor="middle" fill="#04121f" font-size="18" font-weight="700">3</text>
+  <rect x="118" y="360" width="742" height="92" rx="14" fill="#0f1b2d" stroke="#1e293b"/>
+  <text x="150" y="398" fill="#e2e8f0" font-size="24" font-weight="700">Queue</text>
+  <text x="150" y="430" fill="#7dd3fc" font-size="17">p-limit · adaptive turbo mode (10 → 25 workers)</text>
+
+  <!-- 4 -->
+  <circle cx="70" cy="534" r="20" fill="#0ea5e9"/><text x="70" y="541" text-anchor="middle" fill="#04121f" font-size="18" font-weight="700">4</text>
+  <rect x="118" y="488" width="742" height="92" rx="14" fill="#0f1b2d" stroke="#1e293b"/>
+  <text x="150" y="526" fill="#e2e8f0" font-size="24" font-weight="700">Domain processing</text>
+  <text x="150" y="558" fill="#7dd3fc" font-size="17">WHOIS / RDAP on apex · homepage returns 200</text>
+
+  <!-- 5 -->
+  <circle cx="70" cy="662" r="20" fill="#0ea5e9"/><text x="70" y="669" text-anchor="middle" fill="#04121f" font-size="18" font-weight="700">5</text>
+  <rect x="118" y="616" width="742" height="92" rx="14" fill="#0f1b2d" stroke="#1e293b"/>
+  <text x="150" y="654" fill="#e2e8f0" font-size="24" font-weight="700">Contact discovery</text>
+  <text x="150" y="686" fill="#7dd3fc" font-size="17">homepage · sitemap · legal pages · MX patterns</text>
+
+  <!-- 6 -->
+  <circle cx="70" cy="790" r="20" fill="#22c55e"/><text x="70" y="797" text-anchor="middle" fill="#04121f" font-size="18" font-weight="700">6</text>
+  <rect x="118" y="744" width="742" height="92" rx="14" fill="#0f1b2d" stroke="#1e293b"/>
+  <text x="150" y="782" fill="#e2e8f0" font-size="24" font-weight="700">SQLite</text>
+  <text x="150" y="814" fill="#86efac" font-size="17">persistence · idempotent inserts</text>
+
+  <!-- 7 -->
+  <circle cx="70" cy="918" r="20" fill="#0ea5e9"/><text x="70" y="925" text-anchor="middle" fill="#04121f" font-size="18" font-weight="700">7</text>
+  <rect x="118" y="872" width="742" height="92" rx="14" fill="#0f1b2d" stroke="#1e293b"/>
+  <text x="150" y="910" fill="#e2e8f0" font-size="24" font-weight="700">Enrichment (async)</text>
+  <text x="150" y="942" fill="#7dd3fc" font-size="17">INPI · gov APIs · ISIC sector via Groq AI</text>
+
+  <!-- 8 -->
+  <circle cx="70" cy="1046" r="20" fill="#0ea5e9"/><text x="70" y="1053" text-anchor="middle" fill="#04121f" font-size="18" font-weight="700">8</text>
+  <rect x="118" y="1000" width="742" height="92" rx="14" fill="#0f1b2d" stroke="#1e293b"/>
+  <text x="150" y="1038" fill="#e2e8f0" font-size="24" font-weight="700">Nightly exports</text>
+  <text x="150" y="1070" fill="#7dd3fc" font-size="17">business presets → Million Verifier (email check)</text>
+
+  <!-- 9 -->
+  <circle cx="70" cy="1174" r="20" fill="#818cf8"/><text x="70" y="1181" text-anchor="middle" fill="#04121f" font-size="18" font-weight="700">9</text>
+  <rect x="118" y="1128" width="742" height="92" rx="14" fill="#0f1b2d" stroke="#1e293b"/>
+  <text x="150" y="1166" fill="#e2e8f0" font-size="24" font-weight="700">Send</text>
+  <text x="150" y="1198" fill="#c4b5fd" font-size="17">SmartLead → HubSpot</text>
+
+  <!-- reliability callout -->
+  <rect x="40" y="1244" width="820" height="66" rx="14" fill="#132132" stroke="#0ea5e9" stroke-opacity="0.5"/>
+  <text x="66" y="1274" fill="#38bdf8" font-size="18" font-weight="700">Reliability</text>
+  <text x="66" y="1298" fill="#94a3b8" font-size="16">RAM watchdog · cross-app dead-man's-switch · runtime safeguards under load</text>
+</svg>
